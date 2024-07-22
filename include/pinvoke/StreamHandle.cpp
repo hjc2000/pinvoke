@@ -1,13 +1,13 @@
-#include"StreamHandle.h"
-#include<iostream>
-#include<jccpp/stream/FileStream.h>
+#include "StreamHandle.h"
+#include <base/stream/FileStream.h>
+#include <iostream>
 
 using namespace std;
 
 StreamHandle *GetFileStream(std::string *url)
 {
-	shared_ptr<jccpp::FileStream> fs = jccpp::FileStream::Open(url->c_str());
-	return new StreamHandle { fs };
+	shared_ptr<base::FileStream> fs = base::FileStream::Open(url->c_str());
+	return new StreamHandle{fs};
 }
 
 void FreeStream(StreamHandle *handle)
