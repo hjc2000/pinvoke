@@ -1,5 +1,5 @@
-#include"DotNetStream.h"
-#include<iostream>
+#include "DotNetStream.h"
+#include <iostream>
 
 using namespace std;
 
@@ -8,27 +8,26 @@ void DotNetStream::CheckError()
 	if (_error())
 	{
 		/* DotNetStream 内部发生了错误。具体是什么错，可以由 C# 打印出来。
-		* 反正此 DotNetStream 对象已经无法使用了。没有必要将详细的错误信息
-		* 从 C# 传递到 C++。C# 的错误就在 C# 中处理。
-		*/
-		throw std::runtime_error{ ".NET 侧发生了错误" };
+		 * 反正此 DotNetStream 对象已经无法使用了。没有必要将详细的错误信息
+		 * 从 C# 传递到 C++。C# 的错误就在 C# 中处理。
+		 */
+		throw std::runtime_error{".NET 侧发生了错误"};
 	}
 }
 
 DotNetStream::DotNetStream(
-	uint8_t(*can_read)(),
-	uint8_t(*can_write)(),
-	uint8_t(*can_seek)(),
-	int64_t(*length)(),
+	uint8_t (*can_read)(),
+	uint8_t (*can_write)(),
+	uint8_t (*can_seek)(),
+	int64_t (*length)(),
 	void (*set_length)(int64_t value),
-	int32_t(*read)(uint8_t *buffer, int32_t offset, int32_t count),
+	int32_t (*read)(uint8_t *buffer, int32_t offset, int32_t count),
 	void (*write)(uint8_t const *buffer, int32_t offset, int32_t count),
 	void (*flush)(),
 	void (*close)(),
-	int64_t(*position)(),
+	int64_t (*position)(),
 	void (*set_position)(int64_t value),
-	uint8_t(*error)()
-)
+	uint8_t (*error)())
 {
 	_can_read = can_read;
 	_can_write = can_write;
@@ -117,19 +116,18 @@ void DotNetStream::SetPosition(int64_t value)
 }
 
 DotNetStream *CreateDotNetStream(
-	uint8_t(*can_read)(),
-	uint8_t(*can_write)(),
-	uint8_t(*can_seek)(),
-	int64_t(*length)(),
+	uint8_t (*can_read)(),
+	uint8_t (*can_write)(),
+	uint8_t (*can_seek)(),
+	int64_t (*length)(),
 	void (*set_length)(int64_t value),
-	int32_t(*read)(uint8_t *buffer, int32_t offset, int32_t count),
+	int32_t (*read)(uint8_t *buffer, int32_t offset, int32_t count),
 	void (*write)(uint8_t const *buffer, int32_t offset, int32_t count),
 	void (*flush)(),
 	void (*close)(),
-	int64_t(*position)(),
+	int64_t (*position)(),
 	void (*set_position)(int64_t value),
-	uint8_t(*error)()
-)
+	uint8_t (*error)())
 {
 	return new DotNetStream{
 		can_read,
